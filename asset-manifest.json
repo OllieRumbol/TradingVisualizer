@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/trading-visualizer/static/css/main.f855e6bc.css",
-    "main.js": "/trading-visualizer/static/js/main.c96d6913.js",
-    "static/js/453.c5c5ddc9.chunk.js": "/trading-visualizer/static/js/453.c5c5ddc9.chunk.js",
-    "index.html": "/trading-visualizer/index.html",
-    "main.f855e6bc.css.map": "/trading-visualizer/static/css/main.f855e6bc.css.map",
-    "main.c96d6913.js.map": "/trading-visualizer/static/js/main.c96d6913.js.map",
-    "453.c5c5ddc9.chunk.js.map": "/trading-visualizer/static/js/453.c5c5ddc9.chunk.js.map"
+    "main.css": "/TradingVisualizer/static/css/main.f855e6bc.css",
+    "main.js": "/TradingVisualizer/static/js/main.3b0464cf.js",
+    "static/js/453.c5c5ddc9.chunk.js": "/TradingVisualizer/static/js/453.c5c5ddc9.chunk.js",
+    "index.html": "/TradingVisualizer/index.html",
+    "main.f855e6bc.css.map": "/TradingVisualizer/static/css/main.f855e6bc.css.map",
+    "main.3b0464cf.js.map": "/TradingVisualizer/static/js/main.3b0464cf.js.map",
+    "453.c5c5ddc9.chunk.js.map": "/TradingVisualizer/static/js/453.c5c5ddc9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.c96d6913.js"
+    "static/js/main.3b0464cf.js"
   ]
 }
