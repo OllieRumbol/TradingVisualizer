@@ -1,11 +1,15 @@
-import React from "react";
+import React, { Children } from "react";
 import "./Banner.css"
 
-export default function Banner(){
+type BannerProps = {
+    children: React.ReactNode
+}
+
+export default function Banner(props: BannerProps){
     
     return(
         <div className="banner">
-
+            {props.children}
         </div>
     )
 }
