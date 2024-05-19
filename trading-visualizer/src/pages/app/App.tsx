@@ -4,12 +4,15 @@ import Banner from "components/banner/Banner";
 import Dashboard from "pages/dashboard/Dashboard";
 
 import "./App.css";
+import { Typography } from "@mui/material";
 
 function App() {
   return (
     <div>
       <Banner>
-        <h1 style={{color: "white", margin: 0, padding: "5px"}}>Trading Visualizer</h1>
+        <Typography style={{ padding: "9px" }} color="white" variant="h4" component="h3">
+          Trading Visualizer
+        </Typography>
       </Banner>
       <Dashboard />
     </div>

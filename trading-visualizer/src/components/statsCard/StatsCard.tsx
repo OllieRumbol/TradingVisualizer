@@ -15,7 +15,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 
 type StatsCardProps = {
   title: string;
-  value: number;
+  value: string;
   iconType: string;
   changeFromLastMonth: number;
 };
@@ -25,7 +25,6 @@ export default function StatsCard(props: StatsCardProps) {
   const trendColour = changeFromLastMonth > 0 ? "#15b79f" : "#f04438";
   const trendIcon =
     changeFromLastMonth > 0 ? <TrendingUpIcon /> : <TrendingDownIcon />;
-
 
   const [icon, setIcon] = useState(<></>);
   const [iconColour, setIconColour] = useState("#15b79f");
@@ -57,7 +56,7 @@ export default function StatsCard(props: StatsCardProps) {
           spacing={3}
         >
           <Stack spacing={1}>
-            <Typography color="text.secondary" variant="overline">
+            <Typography color="text.secondary" variant="h6" component="h6">
               {title}
             </Typography>
             <Typography variant="h4">{value}</Typography>
@@ -72,11 +71,14 @@ export default function StatsCard(props: StatsCardProps) {
         <Stack sx={{ alignItems: "center" }} direction="row" spacing={2}>
           <Stack sx={{ alignItems: "center" }} direction="row" spacing={0.5}>
             {trendIcon}
-            <Typography variant="body2" color={trendColour}>12%</Typography>
+            <Typography
+              variant="body2"
+              color={trendColour}
+            >{`${changeFromLastMonth}%`}</Typography>
+            <Typography color={trendColour} variant="caption">
+              Since last month
+            </Typography>
           </Stack>
-          <Typography color={trendColour} variant="caption">
-            Since last month
-          </Typography>
         </Stack>
       </Stack>
     </SmallCard>

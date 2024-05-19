@@ -1,4 +1,5 @@
-import React, { Children } from "react";
+import React from "react";
+
 import "./Banner.css"
 
 type BannerProps = {
