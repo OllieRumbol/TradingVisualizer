@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import LargeCard from "components/largeCard/LargeCard";
 import StatsCard from "components/statsCard/StatsCard";
 
 import Box from "@mui/material/Box";
@@ -9,6 +10,9 @@ import { GetTradingInformationForDashboardStatsCard } from "services/TradingServ
 import { MothlyTradingInfomrationForStatsCard } from "type.d";
 
 import "./Dashboard.css";
+import SpentVsEarnedBarGraph from "./spentVsEarnedBarGraph/SpentVsEarnedBarGraph";
+import NumberOfSharesBarGraph from "./numberOfSharesBarGraph/NumberOfSharesBarGraph";
+
 
 export default function Dashboard() {
   const [statsCardTradingInformation, setStatsCardTradingInformation] =
@@ -51,9 +55,12 @@ export default function Dashboard() {
           value={`${statsCardTradingInformation?.NumberOfSharesOwned}`}
           iconType="shares"
           changeFromLastMonth={
-            statsCardTradingInformation?.NumberOfSharesOwnedPercentageChange ?? 0
+            statsCardTradingInformation?.NumberOfSharesOwnedPercentageChange ??
+            0
           }
         />
+        <SpentVsEarnedBarGraph />
+        <NumberOfSharesBarGraph />
       </Grid>
     </Box>
   );
