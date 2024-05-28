@@ -1,4 +1,4 @@
-export interface MothlyTradingInfomration {
+export interface MonthlyTradingInfomration {
   Month: string;
   Year: number;
   AmountInvested: number;
@@ -7,9 +7,13 @@ export interface MothlyTradingInfomration {
   NumberOfSharesOwned: number;
 };
 
-export interface MothlyTradingInfomrationForStatsCard extends MothlyTradingInfomration{
+export interface MothlyTradingInfomrationForStatsCard extends MonthlyTradingInfomration{
   AmountInvestedPercentageChange: number
   ValueOfSharesPercentageChange: number
   NumberOfSharesOwnedPercentageChange: number
   DividendsEarnedPercentageChange: number
+}
+
+export interface GraphTradingInformation extends MonthlyTradingInfomration{
+  TotalAmountInvested: number
 }

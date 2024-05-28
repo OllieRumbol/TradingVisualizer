@@ -1,4 +1,4 @@
-import { MothlyTradingInfomrationForStatsCard } from "type.d";
+import { GraphTradingInformation, MothlyTradingInfomrationForStatsCard } from "type.d";
 
 function GetTradingInformationForDashboardStatsCard() {
   let firebaseTradingInformation = GetFirebaseTradingInformation();
@@ -70,6 +70,23 @@ function GetTradingInformationForDashboardStatsCard() {
   return monthlyTradingInformation;
 }
 
+function GetGraphInfomration() {
+  let firebaseTradingInformationList = GetFirebaseTradingInformation();
+  let graphInformation: GraphTradingInformation[] = [];
+  let totalInvested = 0;
+
+  firebaseTradingInformationList.forEach(firebaseTradingInformation => {
+    graphInformation.push({
+      ...firebaseTradingInformation,
+      TotalAmountInvested: firebaseTradingInformation.AmountInvested + totalInvested,
+    });
+
+    totalInvested = totalInvested + firebaseTradingInformation.AmountInvested;
+  });
+
+  return graphInformation;
+}
+
 function GetFirebaseTradingInformation() {
   return [
     {
@@ -88,7 +105,15 @@ function GetFirebaseTradingInformation() {
       NumberOfSharesOwned: 5.3,
       DividendsEarned: 0,
     },
+    {
+      Month: "June",
+      Year: 2024,
+      AmountInvested: 240,
+      ValueOfShares: 667,
+      NumberOfSharesOwned: 8.5,
+      DividendsEarned: 0,
+    },
   ];
 }
 
-export { GetTradingInformationForDashboardStatsCard };
+export { GetTradingInformationForDashboardStatsCard, GetGraphInfomration };

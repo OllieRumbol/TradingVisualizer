@@ -38,6 +38,7 @@ export default function StatsCard(props: StatsCardProps) {
         setIconColour("#fb9c0c");
       } else if (iconType === "dividends") {
         setIcon(<AccountBalanceIcon />);
+        setIconColour("#2E96FF");
       } else if (iconType === "shares") {
         setIcon(<AppsIcon />);
         setIconColour("#635bff");

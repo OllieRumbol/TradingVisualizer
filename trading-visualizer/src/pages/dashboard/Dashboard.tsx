@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 
-import LargeCard from "components/largeCard/LargeCard";
 import StatsCard from "components/statsCard/StatsCard";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-import { GetTradingInformationForDashboardStatsCard } from "services/TradingService";
-import { MothlyTradingInfomrationForStatsCard } from "type.d";
+import { GetGraphInfomration, GetTradingInformationForDashboardStatsCard } from "services/TradingService";
+import { GraphTradingInformation, MothlyTradingInfomrationForStatsCard } from "type.d";
+
+import SpentVsEarnedBarGraph from "pages/dashboard/spentVsEarnedBarGraph/SpentVsEarnedBarGraph";
+import NumberOfSharesBarGraph from "pages/dashboard/numberOfSharesBarGraph/NumberOfSharesBarGraph";
 
 import "./Dashboard.css";
-import SpentVsEarnedBarGraph from "./spentVsEarnedBarGraph/SpentVsEarnedBarGraph";
-import NumberOfSharesBarGraph from "./numberOfSharesBarGraph/NumberOfSharesBarGraph";
-
+import ProfitsLineGraph from "./profitsLineGraph/ProfitsLineGraph";
 
 export default function Dashboard() {
   const [statsCardTradingInformation, setStatsCardTradingInformation] =
     useState<MothlyTradingInfomrationForStatsCard>();
+  
+    const [graphTradngInformation, setGraphTradngInformation] = useState<GraphTradingInformation[]>([])
 
   useEffect(() => {
-    let tradingInformation = GetTradingInformationForDashboardStatsCard();
-    setStatsCardTradingInformation(tradingInformation);
+    let tradingInformationForStatsCard = GetTradingInformationForDashboardStatsCard();
+    setStatsCardTradingInformation(tradingInformationForStatsCard);
+
+    let graphInformation = GetGraphInfomration();
+    setGraphTradngInformation(graphInformation);
   }, []);
 
   return (
@@ -59,8 +64,8 @@ export default function Dashboard() {
             0
           }
         />
-        <SpentVsEarnedBarGraph />
-        <NumberOfSharesBarGraph />
+        <SpentVsEarnedBarGraph dataset={graphTradngInformation} />
+        <NumberOfSharesBarGraph dataset={graphTradngInformation} />
       </Grid>
     </Box>
   );
