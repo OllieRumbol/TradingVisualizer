@@ -74,11 +74,13 @@ function GetGraphInfomration() {
   let firebaseTradingInformationList = GetFirebaseTradingInformation();
   let graphInformation: GraphTradingInformation[] = [];
   let totalInvested = 0;
-
+  
   firebaseTradingInformationList.forEach(firebaseTradingInformation => {
     graphInformation.push({
       ...firebaseTradingInformation,
       TotalAmountInvested: firebaseTradingInformation.AmountInvested + totalInvested,
+      TotalProfits: firebaseTradingInformation.ValueOfShares + firebaseTradingInformation.DividendsEarned,
+      Date: new Date(`${firebaseTradingInformation.Month} 1, ${firebaseTradingInformation.Year}`)
     });
 
     totalInvested = totalInvested + firebaseTradingInformation.AmountInvested;

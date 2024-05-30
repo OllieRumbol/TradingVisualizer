@@ -66,6 +66,7 @@ export default function Dashboard() {
         />
         <SpentVsEarnedBarGraph dataset={graphTradngInformation} />
         <NumberOfSharesBarGraph dataset={graphTradngInformation} />
+        <ProfitsLineGraph dataset={graphTradngInformation} />
       </Grid>
     </Box>
   );
