@@ -3,7 +3,7 @@ import React from "react";
 import Mediumcard from "components/mediumCard/MediumCard";
 
 import { Stack, Typography } from "@mui/material";
-import { LineChart } from "@mui/x-charts";
+import { LineChart, axisClasses } from "@mui/x-charts";
 
 type ProfitsLineGraphProps = {
   dataset: any[];
@@ -46,18 +46,6 @@ export default function ProfitsLineGraph(props: ProfitsLineGraphProps) {
               ]}
               series={[
                 {
-                  id: "profitsfromShares",
-                  label: "Profits from Shares",
-                  dataKey: "ValueOfShares",
-                  showMark: true,
-                },
-                {
-                  id: "dividends",
-                  label: "Dividends",
-                  dataKey: "DividendsEarned",
-                  showMark: true,
-                },
-                {
                   id: "totalProfits",
                   label: "Total Profits (£)",
                   dataKey: "TotalProfits",
@@ -65,7 +53,12 @@ export default function ProfitsLineGraph(props: ProfitsLineGraphProps) {
                 },
               ]}
               width={600}
-              height={500}
+              height={400}
+              sx={{
+                [`.${axisClasses.left} .${axisClasses.label}`]: {
+                  transform: "translate(-10px, 0)",
+                }
+              }}
             />
           </Stack>
         </Stack>

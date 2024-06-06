@@ -5,23 +5,33 @@ import StatsCard from "components/statsCard/StatsCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-import { GetGraphInfomration, GetTradingInformationForDashboardStatsCard } from "services/TradingService";
-import { GraphTradingInformation, MothlyTradingInfomrationForStatsCard } from "type.d";
+import {
+  GetGraphInfomration,
+  GetTradingInformationForDashboardStatsCard,
+} from "services/TradingService";
+import {
+  GraphTradingInformation,
+  MothlyTradingInfomrationForStatsCard,
+} from "type.d";
 
 import SpentVsEarnedBarGraph from "pages/dashboard/spentVsEarnedBarGraph/SpentVsEarnedBarGraph";
 import NumberOfSharesBarGraph from "pages/dashboard/numberOfSharesBarGraph/NumberOfSharesBarGraph";
+import ProfitsLineGraph from "pages/dashboard/profitsLineGraph/ProfitsLineGraph";
+import SharesPieChart from "pages/dashboard/sharesPieChart/SharesPieChart";
 
 import "./Dashboard.css";
-import ProfitsLineGraph from "./profitsLineGraph/ProfitsLineGraph";
 
 export default function Dashboard() {
   const [statsCardTradingInformation, setStatsCardTradingInformation] =
     useState<MothlyTradingInfomrationForStatsCard>();
-  
-    const [graphTradngInformation, setGraphTradngInformation] = useState<GraphTradingInformation[]>([])
+
+  const [graphTradngInformation, setGraphTradngInformation] = useState<
+    GraphTradingInformation[]
+  >([]);
 
   useEffect(() => {
-    let tradingInformationForStatsCard = GetTradingInformationForDashboardStatsCard();
+    let tradingInformationForStatsCard =
+      GetTradingInformationForDashboardStatsCard();
     setStatsCardTradingInformation(tradingInformationForStatsCard);
 
     let graphInformation = GetGraphInfomration();
@@ -48,11 +58,11 @@ export default function Dashboard() {
           }
         />
         <StatsCard
-          title="Dividends"
-          value={`£${statsCardTradingInformation?.DividendsEarned}`}
-          iconType="dividends"
+          title="Interest"
+          value={`${statsCardTradingInformation?.Interest}%`}
+          iconType="interest"
           changeFromLastMonth={
-            statsCardTradingInformation?.DividendsEarnedPercentageChange ?? 0
+            statsCardTradingInformation?.InterestPercentageChange ?? 0
           }
         />
         <StatsCard
@@ -67,6 +77,7 @@ export default function Dashboard() {
         <SpentVsEarnedBarGraph dataset={graphTradngInformation} />
         <NumberOfSharesBarGraph dataset={graphTradngInformation} />
         <ProfitsLineGraph dataset={graphTradngInformation} />
+        <SharesPieChart />
       </Grid>
     </Box>
   );

@@ -1,21 +1,32 @@
-import { GraphTradingInformation, MothlyTradingInfomrationForStatsCard } from "type.d";
+import {
+  EnhancedFireBaseTradingInformation,
+  FireBaseTradingInformation,
+  GraphTradingInformation,
+  MothlyTradingInfomrationForStatsCard,
+} from "type.d";
 
-function GetTradingInformationForDashboardStatsCard() {
-  let firebaseTradingInformation = GetFirebaseTradingInformation();
+function GetTradingInformationForDashboardStatsCard(): MothlyTradingInfomrationForStatsCard {
+  let firebaseTradingInformation = GetEnhancedFirebaseTradingInformation();
 
-  let AmountInvestedPercentageChange = 0;
-  let ValueOfSharesPercentageChange = 0;
-  let NumberOfSharesOwnedPercentageChange = 0;
-  let DividendsEarnedPercentageChange = 0;
+  let amountInvestedPercentageChange = 0;
+  let valueOfSharesPercentageChange = 0;
+  let numberOfSharesOwnedPercentageChange = 0;
+  let interestPercentageChange = 0;
 
   let currentMonth =
     firebaseTradingInformation[firebaseTradingInformation.length - 1];
+
+  let interest =
+    Math.round(
+      (currentMonth.ValueOfShares / currentMonth.TotalAmountInvested) * 100
+    ) / 100;
+
 
   if (firebaseTradingInformation.length > 1) {
     let preivousMonth =
       firebaseTradingInformation[firebaseTradingInformation.length - 2];
 
-    AmountInvestedPercentageChange =
+    amountInvestedPercentageChange =
       Math.round(
         ((currentMonth.AmountInvested - preivousMonth.AmountInvested) /
           preivousMonth.AmountInvested) *
@@ -23,7 +34,7 @@ function GetTradingInformationForDashboardStatsCard() {
           10
       ) / 10;
 
-    ValueOfSharesPercentageChange =
+    valueOfSharesPercentageChange =
       Math.round(
         ((currentMonth.ValueOfShares - preivousMonth.ValueOfShares) /
           preivousMonth.ValueOfShares) *
@@ -31,7 +42,7 @@ function GetTradingInformationForDashboardStatsCard() {
           10
       ) / 10;
 
-    NumberOfSharesOwnedPercentageChange =
+    numberOfSharesOwnedPercentageChange =
       Math.round(
         ((currentMonth.NumberOfSharesOwned -
           preivousMonth.NumberOfSharesOwned) /
@@ -40,56 +51,75 @@ function GetTradingInformationForDashboardStatsCard() {
           10
       ) / 10;
 
-    if (
-      currentMonth.DividendsEarned !== 0 &&
-      preivousMonth.DividendsEarned !== 0
-    ) {
-      DividendsEarnedPercentageChange =
-        Math.round(
-          ((currentMonth.DividendsEarned - preivousMonth.DividendsEarned) /
-            preivousMonth.DividendsEarned) *
-            100 *
-            10
-        ) / 10;
-    }
+      let preivousInterest = Math.round(
+        (preivousMonth.ValueOfShares / preivousMonth.TotalAmountInvested) * 100
+      ) / 100;
+
+      interestPercentageChange = 
+      Math.round(
+        ((interest -
+          preivousInterest) /
+          preivousInterest) *
+          100 *
+          10
+      ) / 10;
   }
 
   const monthlyTradingInformation: MothlyTradingInfomrationForStatsCard = {
-    Month: "April",
-    Year: 2024,
+    Month: currentMonth.Month,
+    Year: currentMonth.Year,
     AmountInvested: currentMonth.AmountInvested,
-    AmountInvestedPercentageChange: AmountInvestedPercentageChange,
+    AmountInvestedPercentageChange: amountInvestedPercentageChange,
     ValueOfShares: currentMonth.ValueOfShares,
-    ValueOfSharesPercentageChange: ValueOfSharesPercentageChange,
+    ValueOfSharesPercentageChange: valueOfSharesPercentageChange,
     NumberOfSharesOwned: currentMonth.NumberOfSharesOwned,
-    NumberOfSharesOwnedPercentageChange: NumberOfSharesOwnedPercentageChange,
-    DividendsEarned: currentMonth.DividendsEarned,
-    DividendsEarnedPercentageChange: DividendsEarnedPercentageChange,
+    NumberOfSharesOwnedPercentageChange: numberOfSharesOwnedPercentageChange,
+    Interest: interest,
+    InterestPercentageChange: interestPercentageChange
   };
 
   return monthlyTradingInformation;
 }
 
-function GetGraphInfomration() {
-  let firebaseTradingInformationList = GetFirebaseTradingInformation();
+function GetGraphInfomration(): GraphTradingInformation[] {
+  let enhancedFirebaseTradingInformation =
+    GetEnhancedFirebaseTradingInformation();
   let graphInformation: GraphTradingInformation[] = [];
-  let totalInvested = 0;
-  
-  firebaseTradingInformationList.forEach(firebaseTradingInformation => {
+
+  enhancedFirebaseTradingInformation.forEach((firebaseTradingInformation) => {
     graphInformation.push({
       ...firebaseTradingInformation,
-      TotalAmountInvested: firebaseTradingInformation.AmountInvested + totalInvested,
-      TotalProfits: firebaseTradingInformation.ValueOfShares + firebaseTradingInformation.DividendsEarned,
-      Date: new Date(`${firebaseTradingInformation.Month} 1, ${firebaseTradingInformation.Year}`)
+      TotalProfits:
+        firebaseTradingInformation.ValueOfShares -
+        firebaseTradingInformation.TotalAmountInvested,
+      Date: new Date(
+        `${firebaseTradingInformation.Month} 1, ${firebaseTradingInformation.Year}`
+      ),
     });
-
-    totalInvested = totalInvested + firebaseTradingInformation.AmountInvested;
   });
 
   return graphInformation;
 }
 
-function GetFirebaseTradingInformation() {
+function GetEnhancedFirebaseTradingInformation(): EnhancedFireBaseTradingInformation[] {
+  let firebaseTradingInformationList = GetFirebaseTradingInformation();
+  let totalInvested = 0;
+  let enhancedFirebaseTradingInformation: EnhancedFireBaseTradingInformation[] =
+    [];
+
+  firebaseTradingInformationList.forEach((firebaseTradingInformation) => {
+    totalInvested = totalInvested + firebaseTradingInformation.AmountInvested;
+
+    enhancedFirebaseTradingInformation.push({
+      ...firebaseTradingInformation,
+      TotalAmountInvested: totalInvested,
+    });
+  });
+
+  return enhancedFirebaseTradingInformation;
+}
+
+function GetFirebaseTradingInformation(): FireBaseTradingInformation[] {
   return [
     {
       Month: "April",
@@ -97,23 +127,20 @@ function GetFirebaseTradingInformation() {
       AmountInvested: 260,
       ValueOfShares: 255,
       NumberOfSharesOwned: 3.2,
-      DividendsEarned: 0,
     },
     {
       Month: "May",
       Year: 2024,
       AmountInvested: 160,
-      ValueOfShares: 424,
+      ValueOfShares: 417,
       NumberOfSharesOwned: 5.3,
-      DividendsEarned: 0,
     },
     {
       Month: "June",
       Year: 2024,
       AmountInvested: 240,
       ValueOfShares: 667,
-      NumberOfSharesOwned: 8.5,
-      DividendsEarned: 0,
+      NumberOfSharesOwned: 8.4,
     },
   ];
 }
