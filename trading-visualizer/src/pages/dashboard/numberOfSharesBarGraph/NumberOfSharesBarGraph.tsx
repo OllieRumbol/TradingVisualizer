@@ -17,7 +17,7 @@ export default function NumberOfSharesBarGraph(props: NumberOfSharesBarGraphProp
       <Stack spacing={3}>
         <Stack
           direction="row"
-          sx={{ alignItems: "flex-start", justifyContent: "space-between" }}
+          sx={{ alignItems: "center", justifyContent: "center" }}
           spacing={3}
         >
           <Stack spacing={1}>

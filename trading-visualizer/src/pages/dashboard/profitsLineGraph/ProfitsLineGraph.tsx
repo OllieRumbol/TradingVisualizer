@@ -17,7 +17,7 @@ export default function ProfitsLineGraph(props: ProfitsLineGraphProps) {
       <Stack spacing={3}>
         <Stack
           direction="row"
-          sx={{ alignItems: "flex-start", justifyContent: "space-between" }}
+          sx={{ alignItems: "center", justifyContent: "center" }}
           spacing={3}
         >
           <Stack spacing={1}>
@@ -52,7 +52,7 @@ export default function ProfitsLineGraph(props: ProfitsLineGraphProps) {
                   showMark: true,
                 },
               ]}
-              width={600}
+              width={650}
               height={400}
               sx={{
                 [`.${axisClasses.left} .${axisClasses.label}`]: {

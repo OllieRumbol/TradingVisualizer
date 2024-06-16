@@ -138,9 +138,9 @@ function GetFirebaseTradingInformation(): FireBaseTradingInformation[] {
     {
       Month: "June",
       Year: 2024,
-      AmountInvested: 240,
-      ValueOfShares: 667,
-      NumberOfSharesOwned: 8.4,
+      AmountInvested: 270,
+      ValueOfShares: 715,
+      NumberOfSharesOwned: 8.8,
     },
   ];
 }

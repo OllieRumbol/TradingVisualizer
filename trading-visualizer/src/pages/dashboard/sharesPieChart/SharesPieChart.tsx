@@ -6,12 +6,16 @@ import { Stack, Typography } from "@mui/material";
 import { PieChart } from "@mui/x-charts";
 
 export default function SharesPieChart() {
+  const data = [
+    { id: 0, value: 8.8, label: "Vanguard S&P 500 (ACC)" },
+    { id: 1, value: 2.0, label: "Vanguard" },
+  ];
   return (
     <Mediumcard>
       <Stack spacing={3}>
         <Stack
           direction="row"
-          sx={{ alignItems: "flex-start", justifyContent: "space-between" }}
+          sx={{ alignItems: "center", justifyContent: "center" }}
           spacing={3}
         >
           <Stack spacing={1}>
@@ -20,23 +24,19 @@ export default function SharesPieChart() {
             </Typography>
 
             <PieChart
+              dataset={data}
               series={[
                 {
-                  data: [
-                    { id: 0, value: 100, label: "Vanguard S&P 500 (Dist)" },
-                  ],
-                  innerRadius: 90,
-                  outerRadius: 180,
-                  paddingAngle: 30,
-                  cornerRadius: 50,
-                  cx: 180
+                  data,
+                  outerRadius: 150,
+                  cx: 170
                 },
               ]}
-              width={600}
+              width={650}
               height={400}
               slotProps={{
                 legend: {
-                  padding: -10,
+                  padding: 20,
                 },
               }}
             />
