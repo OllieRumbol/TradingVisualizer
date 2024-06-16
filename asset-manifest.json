@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/TradingVisualizer/static/css/main.03c7e89a.css",
-    "main.js": "/TradingVisualizer/static/js/main.fbc2017c.js",
+    "main.js": "/TradingVisualizer/static/js/main.905d1db4.js",
     "static/js/453.12583274.chunk.js": "/TradingVisualizer/static/js/453.12583274.chunk.js",
     "index.html": "/TradingVisualizer/index.html",
     "main.03c7e89a.css.map": "/TradingVisualizer/static/css/main.03c7e89a.css.map",
-    "main.fbc2017c.js.map": "/TradingVisualizer/static/js/main.fbc2017c.js.map",
+    "main.905d1db4.js.map": "/TradingVisualizer/static/js/main.905d1db4.js.map",
     "453.12583274.chunk.js.map": "/TradingVisualizer/static/js/453.12583274.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03c7e89a.css",
-    "static/js/main.fbc2017c.js"
+    "static/js/main.905d1db4.js"
   ]
 }
