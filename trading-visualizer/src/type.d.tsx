@@ -24,3 +24,9 @@ export interface GraphTradingInformation extends FireBaseTradingInformation {
   TotalProfits: number;
   Date: object;
 }
+
+export interface Shares {
+  id: number;
+  value: number;
+  label: string;
+}

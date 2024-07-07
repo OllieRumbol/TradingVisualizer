@@ -1,48 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Mediumcard from "components/mediumCard/MediumCard";
 
-import { Stack, Typography } from "@mui/material";
+import { CardHeader, Stack } from "@mui/material";
 import { PieChart } from "@mui/x-charts";
+import { GetShares } from "services/TradingService";
+import { Shares } from "type.d";
 
 export default function SharesPieChart() {
-  const data = [
-    { id: 0, value: 8.8, label: "Vanguard S&P 500 (ACC)" },
-    { id: 1, value: 2.0, label: "Vanguard" },
-  ];
+  const [shares, setShares] = useState<Shares[]>([]);
+
+  useEffect(() => {
+    setShares(GetShares())
+  
+  }, []);
+
   return (
     <Mediumcard>
-      <Stack spacing={3}>
+      <>
+        <CardHeader title="Shares breakdown" />
+
         <Stack
           direction="row"
           sx={{ alignItems: "center", justifyContent: "center" }}
           spacing={3}
         >
-          <Stack spacing={1}>
-            <Typography variant="h4" component="h4" align="center">
-              Shares Breakdown
-            </Typography>
-
-            <PieChart
-              dataset={data}
-              series={[
-                {
-                  data,
-                  outerRadius: 150,
-                  cx: 170
-                },
-              ]}
-              width={650}
-              height={400}
-              slotProps={{
-                legend: {
-                  padding: 20,
-                },
-              }}
-            />
-          </Stack>
+          <PieChart
+            series={[
+              {
+                data: shares,
+                innerRadius: 100,
+                outerRadius: 150,
+                paddingAngle: 5,
+                cornerRadius: 5,
+                cx: 300,
+                cy: 220,
+              },
+            ]}
+            width={650}
+            height={400}
+            slotProps={{
+              legend: {
+                padding: 10,
+                direction: "row",
+                position: { vertical: "top", horizontal: "left" },
+              },
+            }}
+          />
         </Stack>
-      </Stack>
+      </>
     </Mediumcard>
   );
 }

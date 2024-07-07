@@ -50,11 +50,10 @@ export default function StatsCard(props: StatsCardProps) {
 
   return (
     <SmallCard>
-      <Stack spacing={3}>
+      <Stack spacing={1}>
         <Stack
           direction="row"
           sx={{ alignItems: "flex-start", justifyContent: "space-between" }}
-          spacing={3}
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="h6" component="h6">
@@ -63,23 +62,21 @@ export default function StatsCard(props: StatsCardProps) {
             <Typography variant="h4">{value}</Typography>
           </Stack>
           <Avatar
-            sx={{ backgroundColor: iconColour, height: "56px", width: "56px" }}
+            sx={{ backgroundColor: iconColour, height: "60px", width: "60px" }}
           >
             {icon}
           </Avatar>
         </Stack>
 
-        <Stack sx={{ alignItems: "center" }} direction="row" spacing={2}>
-          <Stack sx={{ alignItems: "center" }} direction="row" spacing={0.5}>
-            {trendIcon}
-            <Typography
-              variant="body2"
-              color={trendColour}
-            >{`${changeFromLastMonth}%`}</Typography>
-            <Typography color={trendColour} variant="caption">
-              Since last month
-            </Typography>
-          </Stack>
+        <Stack sx={{ alignItems: "center" }} direction="row" spacing={1}>
+          {trendIcon}
+          <Typography
+            variant="body2"
+            color={trendColour}
+          >{`${changeFromLastMonth}%`}</Typography>
+          <Typography color={trendColour} variant="caption">
+            Since last month
+          </Typography>
         </Stack>
       </Stack>
     </SmallCard>
