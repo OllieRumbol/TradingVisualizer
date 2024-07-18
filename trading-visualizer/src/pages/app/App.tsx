@@ -1,22 +1,20 @@
 import React from "react";
 
-import Banner from "components/banner/Banner";
 import Dashboard from "pages/dashboard/Dashboard";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
 
-import "./App.css";
-import { Typography } from "@mui/material";
-
-function App() {
+export default function App() {
   return (
-    <div>
-      <Banner>
-        <Typography style={{ padding: "9px" }} color="white" variant="h4" component="h3">
-          Trading Visualizer
-        </Typography>
-      </Banner>
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+            Trading Visualizer {<ShowChartIcon />}
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Dashboard />
-    </div>
+    </>
   );
 }
-
-export default App;

@@ -3,6 +3,7 @@ import {
   FireBaseTradingInformation,
   GraphTradingInformation,
   MothlyTradingInfomrationForStatsCard,
+  Shares,
 } from "type.d";
 
 function GetTradingInformationForDashboardStatsCard(): MothlyTradingInfomrationForStatsCard {
@@ -18,9 +19,11 @@ function GetTradingInformationForDashboardStatsCard(): MothlyTradingInfomrationF
 
   let interest =
     Math.round(
-      (currentMonth.ValueOfShares / currentMonth.TotalAmountInvested) * 100
+      ((currentMonth.ValueOfShares - currentMonth.TotalAmountInvested) /
+        currentMonth.TotalAmountInvested) *
+        100 *
+        100
     ) / 100;
-
 
   if (firebaseTradingInformation.length > 1) {
     let preivousMonth =
@@ -51,17 +54,14 @@ function GetTradingInformationForDashboardStatsCard(): MothlyTradingInfomrationF
           10
       ) / 10;
 
-      let preivousInterest = Math.round(
+    let preivousInterest =
+      Math.round(
         (preivousMonth.ValueOfShares / preivousMonth.TotalAmountInvested) * 100
       ) / 100;
 
-      interestPercentageChange = 
+    interestPercentageChange =
       Math.round(
-        ((interest -
-          preivousInterest) /
-          preivousInterest) *
-          100 *
-          10
+        ((interest - preivousInterest) / preivousInterest) * 100 * 10
       ) / 10;
   }
 
@@ -75,7 +75,7 @@ function GetTradingInformationForDashboardStatsCard(): MothlyTradingInfomrationF
     NumberOfSharesOwned: currentMonth.NumberOfSharesOwned,
     NumberOfSharesOwnedPercentageChange: numberOfSharesOwnedPercentageChange,
     Interest: interest,
-    InterestPercentageChange: interestPercentageChange
+    InterestPercentageChange: interestPercentageChange,
   };
 
   return monthlyTradingInformation;
@@ -138,11 +138,33 @@ function GetFirebaseTradingInformation(): FireBaseTradingInformation[] {
     {
       Month: "June",
       Year: 2024,
-      AmountInvested: 270,
-      ValueOfShares: 715,
-      NumberOfSharesOwned: 8.8,
+      AmountInvested: 320,
+      ValueOfShares: 779.48,
+      NumberOfSharesOwned: 10.83,
+    },
+    {
+      Month: "July",
+      Year: 2024,
+      AmountInvested: 220,
+      ValueOfShares: 984,
+      NumberOfSharesOwned: 14.83,
     },
   ];
 }
 
-export { GetTradingInformationForDashboardStatsCard, GetGraphInfomration };
+function GetShares(): Shares[] {
+  return [
+    { id: 0, value: 10.85, label: "Vanguard S&P 500 (Acc)" },
+    {
+      id: 1,
+      value: 3.98,
+      label: "iShares S&P 500 Information Technology (Acc)",
+    },
+  ];
+}
+
+export {
+  GetTradingInformationForDashboardStatsCard,
+  GetGraphInfomration,
+  GetShares,
+};
