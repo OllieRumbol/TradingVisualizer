@@ -145,22 +145,26 @@ function GetFirebaseTradingInformation(): FireBaseTradingInformation[] {
     {
       Month: "July",
       Year: 2024,
-      AmountInvested: 165,
-      ValueOfShares: 970,
-      NumberOfSharesOwned: 13,
+      AmountInvested: 220,
+      ValueOfShares: 984,
+      NumberOfSharesOwned: 14.83,
     },
   ];
 }
 
 function GetShares(): Shares[] {
   return [
-    { id: 0, value: 8.85, label: "Vanguard S&P 500 (Acc)" },
+    { id: 0, value: 10.85, label: "Vanguard S&P 500 (Acc)" },
     {
       id: 1,
-      value: 1.98,
+      value: 3.98,
       label: "iShares S&P 500 Information Technology (Acc)",
     },
   ];
 }
 
-export { GetTradingInformationForDashboardStatsCard, GetGraphInfomration, GetShares };
+export {
+  GetTradingInformationForDashboardStatsCard,
+  GetGraphInfomration,
+  GetShares,
+};

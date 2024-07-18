@@ -11,8 +11,7 @@ export default function SharesPieChart() {
   const [shares, setShares] = useState<Shares[]>([]);
 
   useEffect(() => {
-    setShares(GetShares())
-  
+    setShares(GetShares());
   }, []);
 
   return (

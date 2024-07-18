@@ -3,9 +3,8 @@ import React from "react";
 import Dashboard from "pages/dashboard/Dashboard";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
-import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <>
       <AppBar position="static">
@@ -19,5 +18,3 @@ function App() {
     </>
   );
 }
-
-export default App;
